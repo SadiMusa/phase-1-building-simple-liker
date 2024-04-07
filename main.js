@@ -23,3 +23,20 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
+function serverResponse() {
+  mimicServerCall().then(function (response) {
+    let likeButton = document.querySelector(".like");
+    likeButton.innerHTML = "Liked!";
+  })
+  .catch(function (error) {
+    let modal = document.getElementById("modal");
+    let modalMessage = document.getElementById("modal-message");
+    modalMessage.textContent = error;
+    modal.classList.remove("hidden");
+
+    setTimeout(function () {
+      modal.classList.add("hidden");
+    }, 3000);
+  });
+}
+serverResponse();
